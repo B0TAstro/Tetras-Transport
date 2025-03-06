@@ -6,9 +6,8 @@ import { getSingleProject } from "../../../../sanity/sanity.query";
 import type { ProjectType } from "@/types";
 import { PortableText } from "@portabletext/react";
 import fallBackImage from "../../../../public/images/fallback-project-image.webp";
-import type { PageProps } from "next";
 
-export interface Props extends PageProps {
+interface Props {
   params: {
     project: string;
   };

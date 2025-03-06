@@ -14,7 +14,7 @@ interface Props {
 }
 
 // Dynamic metadata for SEO
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
+export async function generateMetadata({ params }: { params: { project: string } }): Promise<Metadata> {
   const slug = params.project;
   const project: ProjectType = await getSingleProject(slug);
 

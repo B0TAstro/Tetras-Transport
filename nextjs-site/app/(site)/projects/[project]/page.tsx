@@ -6,12 +6,13 @@ import { getSingleProject } from "../../../../sanity/sanity.query";
 import type { ProjectType } from "@/types";
 import { PortableText } from "@portabletext/react";
 import fallBackImage from "../../../../public/images/fallback-project-image.webp";
+import type { PageProps } from "next";
 
-type Props = {
+export interface Props extends PageProps {
   params: {
     project: string;
   };
-};
+}
 
 // Dynamic metadata for SEO
 export async function generateMetadata({ params }: Props): Promise<Metadata> {

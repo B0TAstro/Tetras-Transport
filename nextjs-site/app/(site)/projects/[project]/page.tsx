@@ -1,5 +1,3 @@
-// app/projects/[project]/page.tsx
-
 import Image from "next/image";
 import { Metadata } from "next";
 import { getSingleProject } from "../../../../sanity/sanity.query";
@@ -7,15 +5,13 @@ import type { ProjectType } from "@/types";
 import { PortableText } from "@portabletext/react";
 import fallBackImage from "../../../../public/images/fallback-project-image.webp";
 
-interface Props {
-  params: {
-    project: string;
-  };
-}
+type Props = {
+  params: Promise<{ project: string }>;
+};
 
-// Dynamic metadata for SEO
-export async function generateMetadata({ params }: { params: { project: string } }): Promise<Metadata> {
-  const slug = params.project;
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const resolvedParams = await params;
+  const slug = resolvedParams.project;
   const project: ProjectType = await getSingleProject(slug);
 
   return {
@@ -30,7 +26,8 @@ export async function generateMetadata({ params }: { params: { project: string }
 }
 
 export default async function Project({ params }: Props) {
-  const slug = params.project;
+  const resolvedParams = await params;
+  const slug = resolvedParams.project;
   const project: ProjectType = await getSingleProject(slug);
 
   return (
